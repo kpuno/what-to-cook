@@ -11,5 +11,4 @@ export default function recipeReducer(state = initialState.recipe, action) {
     default:
       return state;
   }
-  return state;
 }

@@ -11,7 +11,7 @@ const imgStyle = {
     height: '180px'
 };
 
-const RecipeCard = ({id, likes, title, image}) => {
+const RecipeCard = ({id, likes, title, image, getRecipeID}) => {
     return (
         <Panel header={<div className="textTitle">{title}</div>} bsStyle="primary" style={cardStyle}>
             <img style={imgStyle} src={image ? image : ""} alt="Card image cap"/>
@@ -20,7 +20,11 @@ const RecipeCard = ({id, likes, title, image}) => {
                     Likes: {likes}
                     &nbsp;
                     id: {id}
-                    <Link to={'/recipe/' + id} className="btn btn-primary">Details</Link>
+                    <Link 
+                        to={'/recipe/' + id} 
+                        className="btn btn-primary"
+                        onClick={() => getRecipeID(id)}
+                        >Details</Link>
                 </p>
             </div>
         </Panel>
@@ -31,7 +35,8 @@ RecipeCard.propTypes = {
     id : PropTypes.number.isRequired,
     likes: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    image: PropTypes.string
+    image: PropTypes.string,
+    getRecipeID: PropTypes.func
 };
 
 export default RecipeCard;

@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import * as recipeActions from '../../actions/recipeActions';
 import {bindActionCreators} from 'redux';
-import { FormGroup, InputGroup, FormControl, Button, Col, Grid, Row} from 'react-bootstrap';
+import { FormGroup, InputGroup, FormControl, Button, Grid} from 'react-bootstrap';
 
 class SearchBar extends React.Component {
 
@@ -38,8 +38,7 @@ class SearchBar extends React.Component {
     render() {
         return (
             <Grid>
-                <Row>
-                    <form onSubmit={this.onFormSubmit}>
+                <form onSubmit={this.onFormSubmit}>
                     <FormGroup>
                         <InputGroup>
                             <FormControl 
@@ -49,10 +48,9 @@ class SearchBar extends React.Component {
                                 onChange={this.onInputChange}
                                 />
                             <Button bsStyle="primary">Search</Button>
-                        </InputGroup>
-                        </FormGroup>
-                    </form>
-                </Row>
+                        </InputGroup>   
+                    </FormGroup>
+                </form>
             </Grid>
         );
     }

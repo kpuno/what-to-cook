@@ -2,13 +2,27 @@ import React, {PropTypes} from 'react';
 import RecipeCard from './RecipeCard';
 import { connect } from 'react-redux';
 import {Grid, Col} from 'react-bootstrap'; 
+import { bindActionCreators } from 'redux';
+import { fetchDetailedRecipe } from '../../actions/recipeActions';
 
 class RecipeSearchList extends React.Component {
 
     constructor(props) {
         super(props);
 
+        // might not need to set state
+        this.state = {
+            activerecipe: ''
+        };
+
         this.renderRecipe = this.renderRecipe.bind(this);
+        this.getRecipeID = this.getRecipeID.bind(this);
+    }
+
+    getRecipeID(id) {
+        debugger;
+        this.props.fetchDetailedRecipe(id);
+        this.setState({activerecipe: id});  
     }
 
     renderRecipe(recipe) {
@@ -19,7 +33,8 @@ class RecipeSearchList extends React.Component {
                     id={recipe.id}
                     likes={recipe.likes}
                     title={recipe.title}
-                    image={recipe.image}/>
+                    image={recipe.image}
+                    getRecipeID={this.getRecipeID}/>
             </Col>
                 );
     }
@@ -37,11 +52,19 @@ class RecipeSearchList extends React.Component {
 }
 
 RecipeSearchList.propTypes = {
-    recipe: PropTypes.array
+    recipe: PropTypes.array,
+    fetchDetailedRecipe: PropTypes.func
 };
 
 function mapStateToProps(state) {
-  return {recipe: state.recipe.recipelist};
+  return {
+      recipe: state.recipe.recipelist,
+      activerecipe: state.recipe.activerecipe
+    };
 }
 
-export default connect(mapStateToProps)(RecipeSearchList);
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({fetchDetailedRecipe}, dispatch); 
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RecipeSearchList);
