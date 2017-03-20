@@ -20,7 +20,6 @@ class RecipeSearchList extends React.Component {
     }
 
     getRecipeID(id) {
-        debugger;
         this.props.fetchDetailedRecipe(id);
         this.setState({activerecipe: id});  
     }
