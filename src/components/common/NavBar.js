@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchBar from './SearchBar';
-import {Nav, Navbar, NavItem, Button} from 'react-bootstrap';
+import {Nav, Navbar, NavItem} from 'react-bootstrap';
 import {Link} from 'react-router';
 
 class NavBar extends React.Component {
