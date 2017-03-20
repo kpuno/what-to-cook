@@ -1,9 +1,9 @@
 import React, {PropTypes} from 'react';
 import RecipeCard from './RecipeCard';
 import { connect } from 'react-redux';
-import {Grid, Col} from 'react-bootstrap'; 
 import { bindActionCreators } from 'redux';
 import { fetchDetailedRecipe } from '../../actions/recipeActions';
+import {Grid, Col} from 'react-bootstrap'; 
 
 class RecipeSearchList extends React.Component {
 

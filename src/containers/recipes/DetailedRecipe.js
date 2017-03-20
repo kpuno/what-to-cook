@@ -19,10 +19,10 @@ class DetailedRecipe extends React.Component {
     }
 
     // some recipes do not have anything ex. [] some dont have equiment or ingredients or instructions
-
+    // TODO: reafactor
     render(){
         return (
-            <div>
+            <div className="container">
                 <h1>Recipe Detail Page Works</h1>
                 <strong>Equipment</strong>
                 {this.state.details !== null ? this.state.details.equipment.map((equip) => {return <p key={equip.id}>{equip.name}</p>;}) : 'empty'}

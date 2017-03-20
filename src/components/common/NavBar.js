@@ -20,7 +20,7 @@ class NavBar extends React.Component {
                     </Navbar.Header>
                     <Nav>
                         <NavItem><Link to={'/recipesearchlist'}>Recipe Search List</Link></NavItem>
-                        <NavItem>Link</NavItem>
+                        <NavItem>Favourites</NavItem>
                     </Nav>
                     <Nav pullRight>
                         <NavItem>username</NavItem>
