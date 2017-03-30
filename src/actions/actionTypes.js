@@ -13,3 +13,15 @@ export const AJAX_CALL_ERROR = 'AJAX_CALL_ERROR';
 // favourites
 export const ADD_RECIPE_TO_FAVOURITES = 'ADD_RECIPE_TO_FAVOURITES';
 export const ADD_RECIPE_TO_FAVOURITES_SUCCESS = 'ADD_RECIPE_TO_FAVOURITES_SUCCESS';
+export const FETCH_FAVOURITES = 'FETCH_FAVOURITES';
+export const FETCH_FAVOURITES_SUCCESS = 'FETCH_FAVOURITES_SUCCESS';
+
+// Authentication
+export const SIGN_IN_USER = 'SIGN_IN_USER'; 
+export const AUTH_USER = 'AUTH_USER';
+export const DE_AUTH_USER = 'DE_AUTH_USER';
+export const AUTH_ERROR = 'AUTH_ERROR';
+export const FETCH_DATA = 'FETCH_DATA';
+
+//  User
+export const GET_USER = 'GET_USER';

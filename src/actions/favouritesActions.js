@@ -1,21 +1,24 @@
+import axios from 'axios';
 import * as actionTypes from './actionTypes';
-import recipe_api from '../api/recipe_api';
 
-// same action and thunk as getDetailedRecipe
+const HOST_URL = 'http://localhost:3090';
 
-function addRecipeToFavouritesSuccess(recipe) {
-  return { 
-    type: actionTypes.ADD_RECIPE_TO_FAVOURITES_SUCCESS, 
-    data: recipe.data
-  };
+export function fetchFavouritesSuccess(favourites) {
+	return {
+		type: actionTypes.FETCH_FAVOURITES_SUCCESS,
+		data: favourites
+	};
 }
 
-export function addRecipeToFavourites(recipeID) {
-  return function (dispatch) {
-    return recipe_api.getDetailedRecipe(recipeID).then(recipe => {
-      dispatch(addRecipeToFavouritesSuccess(recipe));
-    }).catch(error => {
-      throw (error);
-    });
-  };
+export function fetchFavourites(email) {
+	console.log("HERE");
+	return function(dispatch) {
+		axios.post(`${HOST_URL}/getfavourites`, { email })
+			.then(response => {
+				dispatch(fetchFavouritesSuccess(response.data[0].favourites));
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	};
 }

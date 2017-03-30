@@ -18,4 +18,5 @@ class RecipeApi {
     }
 }
 
+
 export default RecipeApi;

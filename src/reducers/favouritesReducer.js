@@ -1,10 +1,12 @@
 import * as types from '../actions/actionTypes';
 import initialState from './initialState';
 
-export default function favouritesReducer(state = initialState, action) {
+// use initialState.favourites, its ruining mapStateToProps in RecipeCard
+export default function favouritesReducer(state = initialState.favourites, action) {
   switch(action.type) {
-    case types. ADD_RECIPE_TO_FAVOURITES_SUCCESS:
-      return { ...state, favourites: state.favourites.concat(action.data)};
+    case types. FETCH_FAVOURITES_SUCCESS:
+		console.log(action);
+      return state.concat(action.data);
     default:
       return state;
   }
