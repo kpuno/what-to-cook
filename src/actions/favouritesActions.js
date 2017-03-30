@@ -10,12 +10,29 @@ export function fetchFavouritesSuccess(favourites) {
 	};
 }
 
+export function addFavouritesSuccess() {
+	return {
+		type: actionTypes.ADD_FAVOURITES_SUCCESS
+	};
+}
+
 export function fetchFavourites(email) {
-	console.log("HERE");
-	return function(dispatch) {
+	return function (dispatch) {
 		axios.post(`${HOST_URL}/getfavourites`, { email })
 			.then(response => {
 				dispatch(fetchFavouritesSuccess(response.data[0].favourites));
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	};
+}
+
+export function addFavourites({ email, id, title, image, likes }) {
+	return function (dispatch) {
+		axios.post(`${HOST_URL}/addfavourites`, { email, id, title, image, likes })
+			.then(response => {
+				dispatch(addFavouritesSuccess());
 			})
 			.catch(error => {
 				console.log(error);

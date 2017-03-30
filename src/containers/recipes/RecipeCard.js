@@ -3,7 +3,7 @@ import { Panel, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { addRecipeToFavourites } from '../../actions/favouritesActions';
+import { addFavourites } from '../../actions/favouritesActions';
 
 // adding connect, refactor later maybe state can be in a 
 // class is also for testing
@@ -44,14 +44,20 @@ class RecipeCard extends React.Component {
 	constructor(props, id, likes, title, image, getRecipeID) {
 		super(props, id, likes, title, image, getRecipeID);
 
-		this.getRecipe = this.getRecipe.bind(this);
+		this.addFavourites = this.addFavourites.bind(this);
 	}
 
-	getRecipe(id) {
-		this.props.addRecipeToFavourites(id);
+	addFavourites({ email, id, title, image, likes }) {
+		this.props.addFavourites({ email, id, title, image, likes });
+		// console.log(email + " " + id + " " + title + " " + image + " " + likes);
 	}
 
 	render() {
+		let email = this.props.user;
+		let id = this.props.id;
+		let title = this.props.title;
+		let image = this.props.image;
+		let likes = this.props.likes;
 		return (
 			<Panel header={<div className="textTitle">{this.props.title}</div>} bsStyle="primary" style={cardStyle}>
 				<img style={imgStyle} src={this.props.image ? this.props.image : ""} alt="Card image cap" />
@@ -67,7 +73,7 @@ class RecipeCard extends React.Component {
 							onClick={() => this.props.getRecipeID(this.props.id)}
 						>Details</Link>
 						&nbsp;
-                <Button onClick={() => this.getRecipe(this.props.id)} bsStyle="success">Favorite</Button>
+						<Button onClick={() => this.addFavourites({ email, id, title, image, likes })} bsStyle="success">Favorite</Button>
 					</p>
 				</div>
 			</Panel>
@@ -91,12 +97,13 @@ RecipeCard.propTypes = {
 // added for debugging
 function mapStateToProps(state) {
 	return {
-		favourites: state.favourites
+		favourites: state.favourites,
+		user: state.user.email
 	};
 }
 
 function mapDispatchToProps(dispatch) {
-	return bindActionCreators({ addRecipeToFavourites }, dispatch);
+	return bindActionCreators({ addFavourites }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecipeCard);
