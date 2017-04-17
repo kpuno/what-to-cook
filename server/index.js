@@ -9,7 +9,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 // DB Setup
-mongoose.connect('mongodb://user:12345@ds141950.mlab.com:41950/what-to-cook');
+// 'mongodb://user:12345@ds141950.mlab.com:41950/what-to-cook'
+mongoose.connect(process.env.URI || 'mongodb://user:12345@ds141950.mlab.com:41950/what-to-cook');
 
 // App Setup
 app.use(morgan('combined'));

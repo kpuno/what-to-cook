@@ -10,14 +10,15 @@ import routes from './routes';
 import './styles/styles.scss'; //Webpack can import CSS files too!
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/toastr/build/toastr.min.css';
-import types from './actions/actionTypes';
-import thunk from 'redux-thunk';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
 const store = configureStore();
+injectTapEventPlugin();
 
 if (localStorage.getItem('token')) {
 	// fix this
-	store.dispatch({ type: 'AUTH_USER' });
+	// store.dispatch({ type: 'AUTH_USER' });
+	store.dispatch({ type: 'DE_AUTH_USER' });
 }
 
 render(

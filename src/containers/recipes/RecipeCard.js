@@ -3,7 +3,9 @@ import { Panel, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { addFavourites } from '../../actions/favouritesActions';
+import { addFavourites, deleteFavourites } from '../../actions/favouritesActions';
+import { addCompareRecipe } from '../../actions/compareActions';
+import toastr from 'toastr';
 
 // adding connect, refactor later maybe state can be in a 
 // class is also for testing
@@ -16,40 +18,46 @@ const imgStyle = {
 	width: '318px',
 	height: '180px'
 };
-/*
-const RecipeCard = ({id, likes, title, image, getRecipeID}) => {
-    return (
-        <Panel header={<div className="textTitle">{title}</div>} bsStyle="primary" style={cardStyle}>
-            <img style={imgStyle} src={image ? image : ""} alt="Card image cap"/>
-            <div>
-                Likes: {likes}
-                &nbsp;
-                id: {id}
-                <br/>
-                <p>
-                <Link 
-                    to={'/recipe/' + id} 
-                    className="btn btn-primary"
-                    onClick={() => getRecipeID(id)}
-                    >Details</Link>
-                &nbsp;
-                <Button bsStyle="success">Favorite</Button>
-                </p>
-            </div>
-        </Panel>
-    );
-};*/
 
 class RecipeCard extends React.Component {
 	constructor(props, id, likes, title, image, getRecipeID) {
 		super(props, id, likes, title, image, getRecipeID);
 
 		this.addFavourites = this.addFavourites.bind(this);
+		this.favouriteButton = this.favouriteButton.bind(this);
+		this.deleteButton = this.deleteButton.bind(this);
+		this.deleteFavourites = this.deleteFavourites.bind(this);
+		this.addCompareRecipe = this.addCompareRecipe.bind(this);
 	}
 
 	addFavourites({ email, id, title, image, likes }) {
+		toastr.success('Added to favourites');
 		this.props.addFavourites({ email, id, title, image, likes });
-		// console.log(email + " " + id + " " + title + " " + image + " " + likes);
+	}
+
+	deleteFavourites({ email, id, title, image, likes }) {
+		this.props.deleteFavourites({ email, id, title, image, likes });
+	}
+
+	favouriteButton({ email, id, title, image, likes }) {
+		return <Button onClick={() => this.addFavourites({ email, id, title, image, likes })} bsStyle="success">Favorite</Button>
+	}
+
+	deleteButton({ email, id, title, image, likes }) {
+		return <Button onClick={() => this.deleteFavourites({ email, id, title, image, likes })} bsStyle="danger">Delete</Button>
+	}
+
+	addCompareRecipe(id) {
+		if (this.props.compare.length >= 2) {
+			toastr.warning('Only maximum of 2 recipes to compare!');
+		} else {
+			toastr.success('Added to compare');
+			this.props.addCompareRecipe(id);
+		}
+	}
+
+	compareButton(id) {
+		return <Button onClick={() => this.addCompareRecipe(id)} bsStyle="info">Compare</Button>
 	}
 
 	render() {
@@ -73,7 +81,9 @@ class RecipeCard extends React.Component {
 							onClick={() => this.props.getRecipeID(this.props.id)}
 						>Details</Link>
 						&nbsp;
-						<Button onClick={() => this.addFavourites({ email, id, title, image, likes })} bsStyle="success">Favorite</Button>
+						{location.pathname === '/recipesearchlist' ? this.favouriteButton({ email, id, title, image, likes }) : null}
+						{location.pathname === '/recipesearchlist' ? this.compareButton(id) : null}
+						{location.pathname === '/favourites' ? this.deleteButton({ email, id, title, image, likes }) : null}
 					</p>
 				</div>
 			</Panel>
@@ -81,7 +91,7 @@ class RecipeCard extends React.Component {
 	}
 }
 
-// maybe add summarize recipe, but this is going to add too many ajax calls
+// maybe add summarize recipe, but this is going to add too many ajax calls	
 
 RecipeCard.propTypes = {
 	id: PropTypes.number.isRequired,
@@ -98,12 +108,13 @@ RecipeCard.propTypes = {
 function mapStateToProps(state) {
 	return {
 		favourites: state.favourites,
-		user: state.user.email
+		user: state.user.email,
+		compare: state.compare
 	};
 }
 
 function mapDispatchToProps(dispatch) {
-	return bindActionCreators({ addFavourites }, dispatch);
+	return bindActionCreators({ addFavourites, deleteFavourites, addCompareRecipe }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecipeCard);

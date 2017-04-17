@@ -13,5 +13,6 @@ export default {
 	},
 	user: {
 		email: 'test@favourites.com'
-	}
+	},
+	compare: []
 };

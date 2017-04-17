@@ -6,6 +6,7 @@ import favourites from './favouritesReducer';
 import auth from './authReducer';
 import { reducer as form } from 'redux-form';
 import user from './userReducer';
+import compare from './compareReducer';
 
 const rootReducer = combineReducers({
   routing,
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
   favourites,
   auth,
   form,
-	user
+	user,
+	compare
 });
 
 export default rootReducer; 

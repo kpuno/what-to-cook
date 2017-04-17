@@ -6,7 +6,7 @@ class RecipeApi {
         const url = `${constants.ROOT_URL_RECIPE_LIST}&fillIngredients=false&ingredients=${ingredients}&limitLicense=false&number=30&ranking=1`;
         return axios.get(url).then((response) =>
             new Promise(resolve => {
-                setTimeout(()=> resolve(response), constants.DELAY);
+                setTimeout(()=> resolve(response), 0);
             }));
     }
     static getDetailedRecipe(recipeID) {
@@ -14,7 +14,7 @@ class RecipeApi {
 
         return axios.get(url).then((response) =>
             new Promise((resolve) =>
-                setTimeout(() =>resolve(response), constants.DELAY)));
+                setTimeout(() =>resolve(response), 0)));
     }
 }
 

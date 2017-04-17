@@ -8,6 +8,10 @@ export default function favouritesReducer(state = initialState.favourites, actio
       return state.concat(action.data);
 		case types.ADD_FAVOURITES_SUCCESS:
 			return state;
+		case types.DE_AUTH_FAVOURITES:
+			return [];
+		case types.DELETE_FAVOURITES_SUCCESS:
+			return state;
     default:
       return state;
   }

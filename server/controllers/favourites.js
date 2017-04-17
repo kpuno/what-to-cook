@@ -1,5 +1,4 @@
 const User = require('../models/user');
-const config = require('../config');
 
 exports.addFavourite = function (req, res, next) {
 
@@ -41,7 +40,6 @@ exports.addFavourite = function (req, res, next) {
 		});
 }
 
-// maybe add a check to see if already removed or doesnt exist
 exports.removeFavourites = function (req, res, next) {
 	User.update({ email: req.body.email}, {
 		$pull: {

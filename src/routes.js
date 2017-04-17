@@ -8,6 +8,7 @@ import FavouriteRecipes from './containers/recipes/FavouriteRecipes';
 import SignIn from './containers/auth/signIn';
 import SignUp from './containers/auth/signUp';
 import RequireAuth from './containers/hocs/requireAuth';
+import CompareRecipe from './containers/recipes/CompareRecipes';
 
 // import SignIn from './containers/auth/LoginForm';
 // import SignUp from './containers/auth/SignupForm';
@@ -21,6 +22,7 @@ export default (
 			<Route path="favourites" component={RequireAuth(FavouriteRecipes)} />
 			<Route path="/signin" component={SignIn} />
 			<Route path="/signup" component={SignUp} />
+			<Route path="/comparerecipe" component={CompareRecipe} />
 		</Route>
 	</Router>
 );

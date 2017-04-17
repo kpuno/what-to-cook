@@ -1,9 +1,18 @@
 import React from 'react';
+import SearchBar from './SearchBar';
 import { connect } from 'react-redux';
 import { Nav, Navbar, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router';
 import * as actions from '../../actions/authActions';
+import AppBar from 'material-ui/AppBar';
+import IconButton from 'material-ui/IconButton';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
+import FlatButton from 'material-ui/FlatButton';
+import Toggle from 'material-ui/Toggle';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
 class NavBar extends React.Component {
 
@@ -57,13 +66,14 @@ class NavBar extends React.Component {
 						</Navbar.Brand>
 					</Navbar.Header>
 					<Nav>
-						<LinkContainer to={'/recipesearchlist'}><NavItem>Recipe Search</NavItem></LinkContainer>
+						<LinkContainer to={'/recipesearchlist'}><NavItem>Recipe Search List</NavItem></LinkContainer>
 						{this.props.authenticated ? <LinkContainer to={'/favourites'}><NavItem>Favourites</NavItem></LinkContainer> : null}
 					</Nav>
 					<Nav pullRight>
 						{this.headerLinks()}
 					</Nav>
 				</Navbar>
+				<SearchBar/>
 			</div>
 		);
 	}
